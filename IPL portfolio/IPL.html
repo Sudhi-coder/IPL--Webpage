@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Premier League</title>
+    <style>
+        /* Apply styles to the whole page */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: white;
+            background: url('https://wallpapers.com/images/featured/ipl-2021-ix7zwgff29ylomuf.jpg') no-repeat center center/cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Gradient overlay for better contrast */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
+            backdrop-filter: blur(8px);
+            z-index: -1;
+        }
+
+        /* Header styling */
+        header {
+            font-size: 28px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            margin: 0;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+        }
+
+        /* Banner styling */
+        .banner {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            margin-top: 30px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .banner h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .banner p {
+            font-size: 18px;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        /* About Me and About This Website sections */
+        .about-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 90%;
+            max-width: 1200px;
+            margin-top: 30px;
+        }
+
+        .about-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            width: 48%;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: left;
+        }
+
+        .about-section h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #ffcc00;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .about-section h2::after {
+            content: "▼";
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .about-section h2.active::after {
+            transform: rotate(180deg);
+        }
+
+        .about-section p {
+            font-size: 16px;
+            line-height: 1.6;
+            opacity: 0.9;
+            display: none;
+            margin-top: 10px;
+        }
+
+        .about-section p.show {
+            display: block;
+        }
+
+        /* Team Container Grid */
+        .teams-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns per row */
+            gap: 25px;
+            margin-top: 30px;
+            width: 90%;
+            max-width: 1200px;
+            padding: 20px;
+        }
+
+        .team {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .team:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .team img {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .team a {
+            display: block;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .team a:hover {
+            color: #ffcc00;
+        }
+
+        /* League Container */
+        .league-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            grid-column: span 2; /* Span 2 columns to make it rectangular */
+        }
+
+        .league-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .league-container h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #ffcc00;
+        }
+
+        .league-container p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .teams-container {
+                grid-template-columns: repeat(3, 1fr); /* 3 columns for medium screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .teams-container {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .teams-container {
+                grid-template-columns: 1fr; /* 1 column for mobile */
+            }
+        }
+
+        /* Footer styling */
+        footer {
+            margin-top: 40px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🏏 Welcome to My IPL-Themed Webpage! 🏆</h1>
+    </header>
+
+    <section class="banner">
+        <h2>Cricket Meets Code!</h2>
+        <p>Explore my journey as a developer through an exciting IPL-inspired Webpage.</p>
+    </section>
+
+    <!-- About Me and About This Website sections -->
+    <div class="about-container">
+        <section class="about-section">
+            <h2 id="about-me-toggle">About Me</h2>
+            <p id="about-me-content">
+                Hi, I'm Sudhiksha Venkatachalapathy, a passionate developer and a huge cricket enthusiast. I love combining my technical skills with my love for the game, and this portfolio is a reflection of that. Whether it's coding or cheering for my favorite IPL team Royal Challengers Bengaluru, I always give my 100%!
+            </p>
+        </section>
+
+        <section class="about-section">
+            <h2 id="about-website-toggle">About This Website</h2>
+            <p id="about-website-content">
+                This website is a unique blend of my two passions: cricket and coding. Each IPL team represents a different aspect of my skills and projects. Click on your favorite team to explore my work and learn more about my journey as a developer. Let's celebrate the spirit of cricket and innovation together!
+            </p>
+        </section>
+    </div>
+
+    <section class="teams-container">
+        <!-- Existing team containers -->
+        <div class="team">
+            <img src="https://i.pinimg.com/736x/73/77/ac/7377ac0eef3359598a7dde54d50627eb.jpg" alt="RCB">
+            <a href="#">Royal Challengers Bangalore</a> <!-- Updated href -->
+        </div>
+        <div class="team">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZPrmbfAjWVSCBfeSPqdlmau5C6nH2m8hYwQ&s" alt="CSK">
+            <a href="#">Chennai Super Kings</a> <!-- Updated href -->
+        </div>
+        <div class="team">
+            <img src="https://img.etimg.com/thumb/width-1200,height-1200,imgsize-120318,resizemode-75,msid-108687273/news/sports/mumbai-indians-hit-another-century-in-brand-new-season.jpg" alt="MI">
+            <a href="#">Mumbai Indians</a> <!-- Updated href -->
+        </div>
+        <div class="team">
+            <img src="https://mir-s3-cdn-cf.behance.net/projects/404/a9dc23157708395.Y3JvcCwxMDA0LDc4NSwyMjMsMA.png" alt="KKR">
+            <a href="#">Kolkata Knight Riders</a> <!-- Updated href -->
+        </div>
+        <div class="team">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsxsWuk8ejkkoDU0DVKlnJCXpaSIQk-5JdCQ&s" alt="SRH">
+            <a href="#">Sunrisers Hyderabad</a> <!-- Updated href -->
+        </div>
+        <div class="team">
+            <img src="https://i.pinimg.com/736x/a4/87/26/a48726809d1115236c20842dc781ae55.jpg" alt="DC">
+            <a href="#">Delhi Capitals</a> <!-- Updated href -->
+        </div>
+        <div class="team">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg/1200px-This_is_the_logo_for_Rajasthan_Royals%2C_a_cricket_team_playing_in_the_Indian_Premier_League_%28IPL%29.svg.png" alt="RR">
+            <a href="#">Rajasthan Royals</a> <!-- Updated href -->
+        </div>
+        <div class="team">
+            <img src="https://mir-s3-cdn-cf.behance.net/projects/404/614abb172278773.Y3JvcCwxNTAwLDExNzMsMCwxNA.png" alt="PBKS">
+            <a href="#">Punjab Kings</a> <!-- Updated href -->
+        </div>
+
+        <!-- Indian Premier League Container -->
+        <div class="league-container">
+            <h2>Indian Premier League</h2>
+            <p>The Indian Premier League (IPL) is a professional Twenty20 cricket league in India. It is one of the most popular and exciting cricket leagues in the world, featuring top players from around the globe.</p>
+        </div>
+
+        <!-- Remaining team containers -->
+        <div class="team">
+            <img src="https://etimg.etb2bimg.com/photo/89716039.cms" alt="GT">
+            <a href="#">Gujarat Titans</a> <!-- Updated href -->
+        </div>
+        <div class="team">
+            <img src="https://logowik.com/content/uploads/images/lucknow-super-giants3550.logowik.com.webp" alt="LSG">
+            <a href="#">Lucknow Super Giants</a> <!-- Updated href -->
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 My IPL Portfolio | Designed with ❤️ by Sudhiksha Venkatachalapathy</p>
+    </footer>
+
+    <script>
+        // JavaScript to toggle About Me and About This Website content
+        const aboutMeToggle = document.getElementById('about-me-toggle');
+        const aboutMeContent = document.getElementById('about-me-content');
+        const aboutWebsiteToggle = document.getElementById('about-website-toggle');
+        const aboutWebsiteContent = document.getElementById('about-website-content');
+
+        aboutMeToggle.addEventListener('click', () => {
+            aboutMeContent.classList.toggle('show');
+            aboutMeToggle.classList.toggle('active');
+        });
+
+        aboutWebsiteToggle.addEventListener('click', () => {
+            aboutWebsiteContent.classList.toggle('show');
+            aboutWebsiteToggle.classList.toggle('active');
+        });
+
+        // Prevent default behavior of team links
+        document.querySelectorAll('.team a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent the default link behavior
+                alert(`You clicked on ${link.textContent}`); // Optional: Show a message
+            });
+        });
+    </script>
+</body>
+</html>
